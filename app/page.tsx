@@ -20,37 +20,51 @@ type Product = {
   image_urls: string[];
 };
 
-// ===== Sharp Stage Spotlights =====
+// ===== Realistic Stage Spotlights =====
 function StageSpotlights() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       
-      {/* 4 Sharp Spotlights */}
+      {/* 4 Spotlights setup */}
       {[
-        { left: "10%", color: "168,85,247", rotate: "15deg" },   // Purple
-        { left: "35%", color: "6,182,212", rotate: "5deg" },     // Cyan
-        { left: "65%", color: "236,72,153", rotate: "-5deg" },   // Pink
-        { left: "90%", color: "168,85,247", rotate: "-15deg" },  // Purple
+        { left: "10%", color: "168,85,247", rotate: "25deg", delay: 0 },    // Purple
+        { left: "35%", color: "6,182,212", rotate: "10deg", delay: 0.5 },   // Cyan
+        { left: "65%", color: "236,72,153", rotate: "-10deg", delay: 1 },   // Pink
+        { left: "90%", color: "168,85,247", rotate: "-25deg", delay: 1.5 }, // Purple
       ].map((light, i) => (
-        <motion.div
-          key={i}
-          className="absolute -top-20 w-[150px] md:w-[250px] h-[800px] origin-top"
-          style={{
-            left: light.left,
-            background: `linear-gradient(180deg, rgba(${light.color},0.4) 0%, rgba(${light.color},0.05) 50%, transparent 100%)`,
-            clipPath: "polygon(45% 0, 55% 0, 100% 100%, 0% 100%)",
-            transform: `translateX(-50%) rotate(${light.rotate})`,
-          }}
-          animate={{ opacity: [0.3, 1, 0.3] }}
-          transition={{ duration: 4 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
-        />
+        <div key={i} className="absolute top-0 flex flex-col items-center" style={{ left: light.left, transform: "translateX(-50%)" }}>
+          
+          {/* The Wire */}
+          <div className="w-[2px] h-16 bg-gray-600/50" />
+
+          {/* The Light Housing (Spotlight Body) */}
+          <div className="relative w-8 h-10 bg-gray-800 rounded-sm border border-gray-600 shadow-lg z-20">
+            {/* The Glowing Lens */}
+            <div 
+              className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-6 h-3 rounded-full blur-[2px]"
+              style={{ backgroundColor: `rgba(${light.color}, 1)`, boxShadow: `0 0 20px rgba(${light.color}, 1)` }}
+            />
+          </div>
+
+          {/* The Light Beam */}
+          <motion.div
+            className="absolute top-[100px] w-[300px] h-[800px] origin-top z-10"
+            style={{
+              background: `linear-gradient(180deg, rgba(${light.color},0.4) 0%, rgba(${light.color},0.05) 60%, transparent 100%)`,
+              clipPath: "polygon(48% 0, 52% 0, 100% 100%, 0% 100%)",
+              transform: `rotate(${light.rotate})`,
+            }}
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 3 + i, repeat: Infinity, ease: "easeInOut", delay: light.delay }}
+          />
+        </div>
       ))}
 
-      {/* Stage Floor Light (Neeche ki roshni) */}
+      {/* Stage Floor Light (Neeche zameen par roshni ka dayra) */}
       <div 
-        className="absolute bottom-0 left-0 right-0 h-[200px]"
+        className="absolute bottom-0 left-0 right-0 h-[400px]"
         style={{
-          background: "radial-gradient(ellipse at bottom, rgba(168,85,247,0.2) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse at bottom, rgba(255,255,255,0.05) 0%, transparent 60%)",
         }}
       />
     </div>
