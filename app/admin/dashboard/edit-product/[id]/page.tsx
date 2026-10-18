@@ -8,11 +8,14 @@ import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 
 const SUBCATEGORIES = [
+  "Books",
   "Digitals",
   "Shop All Things Beauty",
   "Shop Kitchen Must Have",
   "Home Accessories",
 ];
+
+const MAIN_CATEGORIES = ["My Products", "Education of AI", "Story Books"];
 
 export default function EditProductPage() {
   const router = useRouter();
@@ -26,12 +29,13 @@ export default function EditProductPage() {
   const [existingImages, setExistingImages] = useState<string[]>([]);
   const [newImages, setNewImages] = useState<File[]>([]);
   const [newPreviews, setNewPreviews] = useState<string[]>([]);
+  
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     price: "",
     category: "My Products",
-    subcategory: "Digitals",
+    subcategory: "Books",
     cover_image_url: "🛍️",
     gumroad_url: "#",
   });
@@ -52,7 +56,7 @@ export default function EditProductPage() {
           description: data.description || "",
           price: data.price || "",
           category: data.category || "My Products",
-          subcategory: data.subcategory || "Digitals",
+          subcategory: data.subcategory || "Books",
           cover_image_url: data.cover_image_url || "🛍️",
           gumroad_url: data.gumroad_url || "#",
         });
@@ -167,49 +171,48 @@ export default function EditProductPage() {
               Edit Product
             </span>
           </h1>
-          <p className="text-gray-400 text-sm">Update the details below</p>
         </div>
 
         <form onSubmit={handleSubmit} className="p-8 border border-white/10 rounded-2xl bg-white/5 backdrop-blur-sm">
           
-          {/* Title */}
           <div className="mb-5">
             <label className="block text-sm text-gray-400 mb-2">Title *</label>
-            <input
-              type="text" name="title" value={formData.title} onChange={handleChange} required
-              className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white focus:border-purple-500/50 focus:outline-none"
-            />
+            <input type="text" name="title" value={formData.title} onChange={handleChange} required
+              className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white focus:border-purple-500/50 focus:outline-none" />
           </div>
 
-          {/* Description */}
           <div className="mb-5">
             <label className="block text-sm text-gray-400 mb-2">Description</label>
-            <textarea
-              name="description" value={formData.description} onChange={handleChange} rows={3}
-              className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white focus:border-purple-500/50 focus:outline-none resize-none"
-            />
+            <textarea name="description" value={formData.description} onChange={handleChange} rows={3}
+              className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white focus:border-purple-500/50 focus:outline-none resize-none" />
           </div>
 
-          {/* Subcategory */}
+          {/* MAIN CATEGORY */}
           <div className="mb-5">
-            <label className="block text-sm text-gray-400 mb-2">Shop Category *</label>
-            <select
-              name="subcategory" value={formData.subcategory} onChange={handleChange}
-              className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white focus:border-purple-500/50 focus:outline-none"
-            >
+            <label className="block text-sm text-gray-400 mb-2">Main Category (Website Section) *</label>
+            <select name="category" value={formData.category} onChange={handleChange}
+              className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white focus:border-purple-500/50 focus:outline-none">
+              {MAIN_CATEGORIES.map((cat) => (
+                <option key={cat} value={cat}>{cat}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* SUB CATEGORY */}
+          <div className="mb-5">
+            <label className="block text-sm text-gray-400 mb-2">Shop Category (Filter) *</label>
+            <select name="subcategory" value={formData.subcategory} onChange={handleChange}
+              className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white focus:border-purple-500/50 focus:outline-none">
               {SUBCATEGORIES.map((cat) => (
                 <option key={cat} value={cat}>{cat}</option>
               ))}
             </select>
           </div>
 
-          {/* Price */}
           <div className="mb-5">
             <label className="block text-sm text-gray-400 mb-2">Price</label>
-            <input
-              type="text" name="price" value={formData.price} onChange={handleChange}
-              className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white focus:border-purple-500/50 focus:outline-none"
-            />
+            <input type="text" name="price" value={formData.price} onChange={handleChange}
+              className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white focus:border-purple-500/50 focus:outline-none" />
           </div>
 
           {/* Existing Images */}
@@ -219,13 +222,9 @@ export default function EditProductPage() {
               <div className="flex gap-3 flex-wrap">
                 {existingImages.map((url, i) => (
                   <div key={i} className="relative w-20 h-20 rounded-lg overflow-hidden border border-white/20 group">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={url} alt={`Image ${i + 1}`} className="w-full h-full object-cover" />
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveExistingImage(url)}
-                      className="absolute top-0 right-0 w-6 h-6 bg-red-500/80 text-white text-xs rounded-bl-lg opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
+                    <button type="button" onClick={() => handleRemoveExistingImage(url)}
+                      className="absolute top-0 right-0 w-6 h-6 bg-red-500/80 text-white text-xs rounded-bl-lg opacity-0 group-hover:opacity-100 transition-opacity">
                       ✕
                     </button>
                   </div>
@@ -237,22 +236,16 @@ export default function EditProductPage() {
           {/* Add New Images */}
           <div className="mb-5">
             <label className="block text-sm text-gray-400 mb-2">Add More Images</label>
-            <input
-              type="file" accept="image/*" multiple onChange={handleImageSelect}
-              className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white focus:border-purple-500/50 focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-600 file:text-white hover:file:bg-purple-700"
-            />
+            <input type="file" accept="image/*" multiple onChange={handleImageSelect}
+              className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white focus:border-purple-500/50 focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-600 file:text-white hover:file:bg-purple-700" />
             
             {newPreviews.length > 0 && (
               <div className="flex gap-3 mt-4 flex-wrap">
                 {newPreviews.map((src, i) => (
                   <div key={i} className="relative w-20 h-20 rounded-lg overflow-hidden border border-purple-500/50 group">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={src} alt={`New ${i + 1}`} className="w-full h-full object-cover" />
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveNewImage(i)}
-                      className="absolute top-0 right-0 w-6 h-6 bg-red-500/80 text-white text-xs rounded-bl-lg opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
+                    <button type="button" onClick={() => handleRemoveNewImage(i)}
+                      className="absolute top-0 right-0 w-6 h-6 bg-red-500/80 text-white text-xs rounded-bl-lg opacity-0 group-hover:opacity-100 transition-opacity">
                       ✕
                     </button>
                   </div>
@@ -261,22 +254,16 @@ export default function EditProductPage() {
             )}
           </div>
 
-          {/* Cover Emoji */}
           <div className="mb-5">
             <label className="block text-sm text-gray-400 mb-2">Cover Emoji</label>
-            <input
-              type="text" name="cover_image_url" value={formData.cover_image_url} onChange={handleChange}
-              className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white focus:border-purple-500/50 focus:outline-none"
-            />
+            <input type="text" name="cover_image_url" value={formData.cover_image_url} onChange={handleChange}
+              className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white focus:border-purple-500/50 focus:outline-none" />
           </div>
 
-          {/* Buy Link */}
           <div className="mb-6">
             <label className="block text-sm text-gray-400 mb-2">Buy Link</label>
-            <input
-              type="text" name="gumroad_url" value={formData.gumroad_url} onChange={handleChange}
-              className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white focus:border-purple-500/50 focus:outline-none"
-            />
+            <input type="text" name="gumroad_url" value={formData.gumroad_url} onChange={handleChange}
+              className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white focus:border-purple-500/50 focus:outline-none" />
           </div>
 
           {message && (
@@ -285,10 +272,8 @@ export default function EditProductPage() {
             </div>
           )}
 
-          <button
-            type="submit" disabled={saving}
-            className="w-full py-3 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg font-semibold text-white hover:scale-105 transition-transform disabled:opacity-50"
-          >
+          <button type="submit" disabled={saving}
+            className="w-full py-3 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg font-semibold text-white hover:scale-105 transition-transform disabled:opacity-50">
             {uploading ? "Uploading images..." : saving ? "Saving..." : "Save Changes"}
           </button>
         </form>
