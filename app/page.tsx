@@ -20,51 +20,52 @@ type Product = {
   image_urls: string[];
 };
 
-// ===== Realistic Stage Spotlights =====
-function StageSpotlights() {
+// ===== Realistic Studio Spotlights (Like your Image) =====
+function StudioSpotlights() {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       
-      {/* 4 Spotlights setup */}
+      {/* 4 Light Fixtures & Beams */}
       {[
-        { left: "10%", color: "168,85,247", rotate: "25deg", delay: 0 },    // Purple
-        { left: "35%", color: "6,182,212", rotate: "10deg", delay: 0.5 },   // Cyan
-        { left: "65%", color: "236,72,153", rotate: "-10deg", delay: 1 },   // Pink
-        { left: "90%", color: "168,85,247", rotate: "-25deg", delay: 1.5 }, // Purple
+        { left: "15%", rotate: "25deg", delay: 0 },
+        { left: "38%", rotate: "8deg", delay: 1 },
+        { left: "62%", rotate: "-8deg", delay: 0.5 },
+        { left: "85%", rotate: "-25deg", delay: 1.5 },
       ].map((light, i) => (
-        <div key={i} className="absolute top-0 flex flex-col items-center" style={{ left: light.left, transform: "translateX(-50%)" }}>
-          
-          {/* The Wire */}
-          <div className="w-[2px] h-16 bg-gray-600/50" />
+        <div
+          key={i}
+          className="absolute top-0 flex flex-col items-center origin-top"
+          style={{ left: light.left, transform: "translateX(-50%)" }}
+        >
+          {/* Light Wire */}
+          <div className="w-[2px] h-16 bg-zinc-700" />
 
-          {/* The Light Housing (Spotlight Body) */}
-          <div className="relative w-8 h-10 bg-gray-800 rounded-sm border border-gray-600 shadow-lg z-20">
-            {/* The Glowing Lens */}
-            <div 
-              className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-6 h-3 rounded-full blur-[2px]"
-              style={{ backgroundColor: `rgba(${light.color}, 1)`, boxShadow: `0 0 20px rgba(${light.color}, 1)` }}
-            />
+          {/* Light Housing (Metal Body) */}
+          <div className="relative w-10 h-12 bg-zinc-800 rounded-md border-b-4 border-zinc-600 shadow-2xl flex flex-col items-center justify-end pb-1 z-20">
+            {/* Glowing Lens */}
+            <div className="w-6 h-3 bg-white rounded-full shadow-[0_0_20px_5px_rgba(255,255,255,0.8)]" />
           </div>
 
-          {/* The Light Beam */}
+          {/* Soft White Light Beam */}
           <motion.div
-            className="absolute top-[100px] w-[300px] h-[800px] origin-top z-10"
+            className="absolute top-[110px] w-[350px] md:w-[500px] h-[900px] origin-top z-10"
             style={{
-              background: `linear-gradient(180deg, rgba(${light.color},0.4) 0%, rgba(${light.color},0.05) 60%, transparent 100%)`,
-              clipPath: "polygon(48% 0, 52% 0, 100% 100%, 0% 100%)",
+              background: "linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 40%, transparent 80%)",
+              clipPath: "polygon(45% 0, 55% 0, 100% 100%, 0% 100%)",
               transform: `rotate(${light.rotate})`,
+              filter: "blur(15px)", // Yeh soft realistic look dega
             }}
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 3 + i, repeat: Infinity, ease: "easeInOut", delay: light.delay }}
+            animate={{ opacity: [0.7, 1, 0.7] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: light.delay }}
           />
         </div>
       ))}
 
-      {/* Stage Floor Light (Neeche zameen par roshni ka dayra) */}
+      {/* Stage Floor Glow (Neeche zameen par roshni) */}
       <div 
-        className="absolute bottom-0 left-0 right-0 h-[400px]"
+        className="absolute bottom-0 left-0 right-0 h-[400px] z-0"
         style={{
-          background: "radial-gradient(ellipse at bottom, rgba(255,255,255,0.05) 0%, transparent 60%)",
+          background: "radial-gradient(ellipse at bottom, rgba(255,255,255,0.15) 0%, transparent 60%)",
         }}
       />
     </div>
@@ -103,31 +104,32 @@ export default function Home() {
       {/* ===== 1. HERO SECTION ===== */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center">
         
-        <StageSpotlights />
+        {/* Background Spotlights */}
+        <StudioSpotlights />
 
-        <div className="relative z-10 max-w-4xl mx-auto">
+        <div className="relative z-20 max-w-4xl mx-auto mt-20">
           
           <motion.div
             initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-8 px-5 py-2 border border-purple-500/50 rounded-full bg-purple-500/10 backdrop-blur-sm inline-flex items-center gap-2"
+            className="mb-8 px-5 py-2 border border-white/20 rounded-full bg-white/5 backdrop-blur-md inline-flex items-center gap-2"
           >
             <motion.span
               animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
               transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-2 h-2 bg-purple-400 rounded-full"
+              className="w-2 h-2 bg-white rounded-full shadow-[0_0_10px_white]"
             />
-            <p className="text-sm text-purple-300 font-medium">Books, Products & More</p>
+            <p className="text-sm text-gray-200 font-medium tracking-wide">Books, Products & More</p>
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 30, filter: "blur(12px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.9, delay: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
-            className="text-6xl md:text-8xl font-bold mb-6 tracking-tight drop-shadow-2xl"
+            className="text-6xl md:text-8xl font-bold mb-6 tracking-tight drop-shadow-[0_0_40px_rgba(255,255,255,0.4)]"
           >
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
               Nexora Digital
             </span>
           </motion.h1>
@@ -136,7 +138,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
-            className="text-xl md:text-2xl text-gray-400 mb-2"
+            className="text-xl md:text-2xl text-gray-300 mb-2 font-medium"
           >
             Premium Products by
           </motion.p>
@@ -145,7 +147,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.9 }}
-            className="text-2xl md:text-3xl font-semibold text-white mb-12 drop-shadow-lg"
+            className="text-2xl md:text-3xl font-bold text-white mb-12 tracking-wide drop-shadow-lg"
           >
             M. Shoaib Memon
           </motion.p>
@@ -159,7 +161,7 @@ export default function Home() {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
               <Link
                 href="/products"
-                className="block px-8 py-4 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full font-semibold text-white shadow-lg shadow-pink-500/50 hover:shadow-pink-500/80 transition-shadow duration-300"
+                className="block px-8 py-4 bg-white text-black rounded-full font-bold shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] transition-all duration-300"
               >
                 🛍️ Shop Now
               </Link>
@@ -168,7 +170,7 @@ export default function Home() {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
               <Link
                 href="/books"
-                className="block px-8 py-4 border border-white/20 rounded-full font-semibold text-white hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
+                className="block px-8 py-4 border border-white/30 rounded-full font-semibold text-white bg-black/40 backdrop-blur-md hover:bg-white/10 transition-all duration-300"
               >
                 📖 Explore Books
               </Link>
@@ -184,7 +186,7 @@ export default function Home() {
           transition={{ delay: 1.6 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 cursor-pointer group"
         >
-          <div className="flex flex-col items-center gap-2 text-gray-500 group-hover:text-purple-400 transition-colors">
+          <div className="flex flex-col items-center gap-2 text-gray-400 group-hover:text-white transition-colors">
             <p className="text-xs tracking-widest uppercase">Scroll</p>
             <motion.div
               animate={{ y: [0, 8, 0] }}
@@ -208,7 +210,7 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="relative z-10 py-24 px-6"
+        className="relative z-10 py-24 px-6 bg-black"
       >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
@@ -224,7 +226,7 @@ export default function Home() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" style={{ perspective: "1200px" }}>
               {books.map((book) => (
                 <TiltCard key={book.id}>
-                  <div className="group p-6 border border-white/10 rounded-2xl bg-white/5 backdrop-blur-sm hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-300">
+                  <div className="group p-6 border border-white/10 rounded-2xl bg-zinc-900/50 backdrop-blur-sm hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-300">
                     <ImageCarousel
                       images={book.image_urls || []}
                       fallback={book.cover_image_url || "📘"}
@@ -261,7 +263,7 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="relative z-10 py-24 px-6 bg-gradient-to-b from-transparent via-purple-900/5 to-transparent"
+        className="relative z-10 py-24 px-6 bg-gradient-to-b from-black via-purple-900/10 to-black"
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
@@ -277,7 +279,7 @@ export default function Home() {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6 items-start" style={{ perspective: "1500px" }}>
               {products.map((product) => (
                 <TiltCard key={product.id}>
-                  <div className="group relative rounded-2xl overflow-hidden bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 hover:border-pink-500/50 transition-all duration-300 flex flex-col">
+                  <div className="group relative rounded-2xl overflow-hidden bg-zinc-900/80 border border-white/10 hover:border-pink-500/50 transition-all duration-300 flex flex-col">
                     <div className="cursor-zoom-in">
                       <ImageCarousel
                         images={product.image_urls || []}
@@ -293,7 +295,7 @@ export default function Home() {
                       <h3 className="text-sm md:text-base font-bold text-white mb-2 line-clamp-2 leading-snug">
                         {product.title}
                       </h3>
-                      <p className="text-xs text-gray-500 mb-3 line-clamp-2 flex-1">
+                      <p className="text-xs text-gray-400 mb-3 line-clamp-2 flex-1">
                         {product.description}
                       </p>
                       <div className="flex items-center justify-between gap-2 mb-3">
@@ -332,7 +334,7 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="relative z-10 py-24 px-6"
+        className="relative z-10 py-24 px-6 bg-black"
       >
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-8">
@@ -368,7 +370,7 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="relative z-10 py-24 px-6 bg-gradient-to-b from-transparent to-purple-900/10"
+        className="relative z-10 py-24 px-6 bg-gradient-to-b from-black to-purple-900/20"
       >
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
