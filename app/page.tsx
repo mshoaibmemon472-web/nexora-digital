@@ -20,65 +20,37 @@ type Product = {
   image_urls: string[];
 };
 
-// ===== Stage Spotlights Background =====
+// ===== Sharp Stage Spotlights =====
 function StageSpotlights() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       
-      {/* 4 Spotlights Cones */}
-      {/* 1. Far Left */}
-      <motion.div
-        className="absolute -top-10 -left-10 md:left-10 w-[300px] md:w-[400px] h-[800px] origin-top"
-        style={{
-          background: "linear-gradient(180deg, rgba(168,85,247,0.4) 0%, rgba(168,85,247,0.1) 40%, transparent 80%)",
-          clipPath: "polygon(45% 0, 55% 0, 100% 100%, 0% 100%)",
-          transform: "rotate(15deg)",
-        }}
-        animate={{ opacity: [0.4, 1, 0.4] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0 }}
-      />
+      {/* 4 Sharp Spotlights */}
+      {[
+        { left: "10%", color: "168,85,247", rotate: "15deg" },   // Purple
+        { left: "35%", color: "6,182,212", rotate: "5deg" },     // Cyan
+        { left: "65%", color: "236,72,153", rotate: "-5deg" },   // Pink
+        { left: "90%", color: "168,85,247", rotate: "-15deg" },  // Purple
+      ].map((light, i) => (
+        <motion.div
+          key={i}
+          className="absolute -top-20 w-[150px] md:w-[250px] h-[800px] origin-top"
+          style={{
+            left: light.left,
+            background: `linear-gradient(180deg, rgba(${light.color},0.4) 0%, rgba(${light.color},0.05) 50%, transparent 100%)`,
+            clipPath: "polygon(45% 0, 55% 0, 100% 100%, 0% 100%)",
+            transform: `translateX(-50%) rotate(${light.rotate})`,
+          }}
+          animate={{ opacity: [0.3, 1, 0.3] }}
+          transition={{ duration: 4 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
+        />
+      ))}
 
-      {/* 2. Center Left */}
-      <motion.div
-        className="absolute -top-10 left-[30%] w-[250px] md:w-[350px] h-[700px] origin-top"
-        style={{
-          background: "linear-gradient(180deg, rgba(6,182,212,0.4) 0%, rgba(6,182,212,0.1) 40%, transparent 80%)",
-          clipPath: "polygon(45% 0, 55% 0, 100% 100%, 0% 100%)",
-          transform: "rotate(5deg)",
-        }}
-        animate={{ opacity: [0.4, 1, 0.4] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-      />
-
-      {/* 3. Center Right */}
-      <motion.div
-        className="absolute -top-10 right-[30%] w-[250px] md:w-[350px] h-[700px] origin-top"
-        style={{
-          background: "linear-gradient(180deg, rgba(236,72,153,0.3) 0%, rgba(236,72,153,0.05) 40%, transparent 80%)",
-          clipPath: "polygon(45% 0, 55% 0, 100% 100%, 0% 100%)",
-          transform: "rotate(-5deg)",
-        }}
-        animate={{ opacity: [0.3, 0.9, 0.3] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-      />
-
-      {/* 4. Far Right */}
-      <motion.div
-        className="absolute -top-10 -right-10 md:right-10 w-[300px] md:w-[400px] h-[800px] origin-top"
-        style={{
-          background: "linear-gradient(180deg, rgba(168,85,247,0.4) 0%, rgba(168,85,247,0.1) 40%, transparent 80%)",
-          clipPath: "polygon(45% 0, 55% 0, 100% 100%, 0% 100%)",
-          transform: "rotate(-15deg)",
-        }}
-        animate={{ opacity: [0.4, 1, 0.4] }}
-        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-      />
-
-      {/* Stage Floor Light */}
+      {/* Stage Floor Light (Neeche ki roshni) */}
       <div 
-        className="absolute bottom-0 left-0 right-0 h-[300px]"
+        className="absolute bottom-0 left-0 right-0 h-[200px]"
         style={{
-          background: "radial-gradient(ellipse at bottom, rgba(168,85,247,0.3) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse at bottom, rgba(168,85,247,0.2) 0%, transparent 70%)",
         }}
       />
     </div>
@@ -119,14 +91,6 @@ export default function Home() {
         
         <StageSpotlights />
 
-        {/* Static Glow Behind Title */}
-        <div 
-          className="absolute w-[600px] h-[600px] rounded-full pointer-events-none"
-          style={{
-            background: "radial-gradient(circle, rgba(168,85,247,0.35) 0%, rgba(6,182,212,0.2) 40%, transparent 70%)",
-          }}
-        />
-
         <div className="relative z-10 max-w-4xl mx-auto">
           
           <motion.div
@@ -147,7 +111,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 30, filter: "blur(12px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.9, delay: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
-            className="text-6xl md:text-8xl font-bold mb-6 tracking-tight"
+            className="text-6xl md:text-8xl font-bold mb-6 tracking-tight drop-shadow-2xl"
           >
             <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
               Nexora Digital
@@ -167,7 +131,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.9 }}
-            className="text-2xl md:text-3xl font-semibold text-white mb-12"
+            className="text-2xl md:text-3xl font-semibold text-white mb-12 drop-shadow-lg"
           >
             M. Shoaib Memon
           </motion.p>
