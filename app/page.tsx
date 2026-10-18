@@ -20,79 +20,54 @@ type Product = {
   image_urls: string[];
 };
 
-// ===== Realistic Stage Spotlights =====
-function StudioSpotlights() {
+// ===== Realistic Smoke Background with Purple Theme =====
+function HeroBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-      {[
-        { left: "15%", rotate: "25deg", delay: 0 },
-        { left: "38%", rotate: "8deg", delay: 1 },
-        { left: "62%", rotate: "-8deg", delay: 0.5 },
-        { left: "85%", rotate: "-25deg", delay: 1.5 },
-      ].map((light, i) => (
-        <div
-          key={i}
-          className="absolute top-0 flex flex-col items-center origin-top"
-          style={{ left: light.left, transform: "translateX(-50%)" }}
-        >
-          <div className="w-[2px] h-16 bg-zinc-700" />
-          <div className="relative w-10 h-12 bg-zinc-800 rounded-md border-b-4 border-zinc-600 shadow-2xl flex flex-col items-center justify-end pb-1 z-20">
-            <div className="w-6 h-3 bg-white rounded-full shadow-[0_0_20px_5px_rgba(255,255,255,0.8)]" />
-          </div>
-          <motion.div
-            className="absolute top-[110px] w-[350px] md:w-[500px] h-[900px] origin-top z-10"
-            style={{
-              background: "linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 40%, transparent 80%)",
-              clipPath: "polygon(45% 0, 55% 0, 100% 100%, 0% 100%)",
-              transform: `rotate(${light.rotate})`,
-              filter: "blur(15px)",
-            }}
-            animate={{ opacity: [0.6, 0.9, 0.6] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: light.delay }}
-          />
-        </div>
-      ))}
       
-      {/* Stage Floor Glow (Purple tint) */}
-      <div 
-        className="absolute bottom-0 left-0 right-0 h-[400px] z-0"
+      {/* 1. Real Smoke Image */}
+      <motion.div
+        className="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-screen"
         style={{
-          background: "radial-gradient(ellipse at bottom, rgba(168,85,247,0.2) 0%, transparent 60%)",
+          backgroundImage: "url('/smoke-bg.jpg')", 
+          backgroundPosition: "bottom center",
+        }}
+        animate={{
+          scale: [1, 1.05, 1], // Halka sa breathing effect
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "easeInOut",
         }}
       />
-    </div>
-  );
-}
 
-// ===== Animated Heavy Stage Smoke =====
-function StageSmoke() {
-  return (
-    <div className="absolute bottom-0 left-0 right-0 h-[600px] overflow-hidden pointer-events-none z-10">
-      {[...Array(12)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute rounded-full blur-[40px] mix-blend-screen"
-          style={{
-            width: Math.random() * 400 + 200 + "px",
-            height: Math.random() * 300 + 150 + "px",
-            bottom: `-${Math.random() * 100}px`,
-            left: `${Math.random() * 100}%`,
-            background: i % 2 === 0 ? "rgba(255, 255, 255, 0.15)" : "rgba(168, 85, 247, 0.15)", // White & Purple Smoke
-          }}
-          animate={{
-            x: [0, Math.random() * 150 - 75, 0],
-            y: [0, Math.random() * -100 - 50, 0],
-            scale: [1, Math.random() * 0.5 + 1.3, 1],
-            opacity: [0, 0.45, 0], // Zyada visible fog
-          }}
-          transition={{
-            duration: Math.random() * 8 + 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: Math.random() * 5,
-          }}
-        />
-      ))}
+      {/* 2. Purple Color Overlay (Taaki smoke aapki theme se match kare) */}
+      <div className="absolute inset-0 bg-purple-900/30 mix-blend-color" />
+
+      {/* 3. Dark Overlay (Taaki Text Saaf Padha Jaye) */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
+
+      {/* 4. Purple Spotlight Beam from Top Right */}
+      <motion.div
+        className="absolute -top-20 right-10 w-[300px] md:w-[500px] h-[800px] origin-top"
+        style={{
+          background: "linear-gradient(180deg, rgba(168,85,247,0.3) 0%, transparent 80%)",
+          clipPath: "polygon(40% 0, 60% 0, 100% 100%, 0% 100%)",
+          transform: "rotate(-15deg)",
+          filter: "blur(20px)",
+        }}
+        animate={{ opacity: [0.4, 0.8, 0.4] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* 5. Purple Floor Glow */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-[300px]"
+        style={{
+          background: "radial-gradient(ellipse at bottom, rgba(168,85,247,0.25) 0%, transparent 70%)",
+        }}
+      />
     </div>
   );
 }
@@ -129,9 +104,8 @@ export default function Home() {
       {/* ===== 1. HERO SECTION ===== */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center">
         
-        {/* Background Effects */}
-        <StudioSpotlights />
-        <StageSmoke />
+        {/* Background Effects (Image + Code) */}
+        <HeroBackground />
 
         <div className="relative z-20 max-w-4xl mx-auto mt-20">
           
