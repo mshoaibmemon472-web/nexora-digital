@@ -28,57 +28,57 @@ function StageSpotlights() {
       {/* 4 Spotlights Cones */}
       {/* 1. Far Left */}
       <motion.div
-        className="absolute -top-20 -left-10 md:left-10 w-[300px] md:w-[400px] h-[800px] origin-top"
+        className="absolute -top-10 -left-10 md:left-10 w-[300px] md:w-[400px] h-[800px] origin-top"
         style={{
-          background: "linear-gradient(180deg, rgba(168,85,247,0.15) 0%, rgba(168,85,247,0.05) 40%, transparent 80%)",
+          background: "linear-gradient(180deg, rgba(168,85,247,0.4) 0%, rgba(168,85,247,0.1) 40%, transparent 80%)",
           clipPath: "polygon(45% 0, 55% 0, 100% 100%, 0% 100%)",
           transform: "rotate(15deg)",
         }}
-        animate={{ opacity: [0.5, 1, 0.5] }}
+        animate={{ opacity: [0.4, 1, 0.4] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0 }}
       />
 
       {/* 2. Center Left */}
       <motion.div
-        className="absolute -top-20 left-[30%] w-[250px] md:w-[350px] h-[700px] origin-top"
+        className="absolute -top-10 left-[30%] w-[250px] md:w-[350px] h-[700px] origin-top"
         style={{
-          background: "linear-gradient(180deg, rgba(6,182,212,0.15) 0%, rgba(6,182,212,0.05) 40%, transparent 80%)",
+          background: "linear-gradient(180deg, rgba(6,182,212,0.4) 0%, rgba(6,182,212,0.1) 40%, transparent 80%)",
           clipPath: "polygon(45% 0, 55% 0, 100% 100%, 0% 100%)",
           transform: "rotate(5deg)",
         }}
-        animate={{ opacity: [0.5, 0.9, 0.5] }}
+        animate={{ opacity: [0.4, 1, 0.4] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       />
 
       {/* 3. Center Right */}
       <motion.div
-        className="absolute -top-20 right-[30%] w-[250px] md:w-[350px] h-[700px] origin-top"
+        className="absolute -top-10 right-[30%] w-[250px] md:w-[350px] h-[700px] origin-top"
         style={{
-          background: "linear-gradient(180deg, rgba(236,72,153,0.12) 0%, rgba(236,72,153,0.04) 40%, transparent 80%)",
+          background: "linear-gradient(180deg, rgba(236,72,153,0.3) 0%, rgba(236,72,153,0.05) 40%, transparent 80%)",
           clipPath: "polygon(45% 0, 55% 0, 100% 100%, 0% 100%)",
           transform: "rotate(-5deg)",
         }}
-        animate={{ opacity: [0.4, 0.8, 0.4] }}
+        animate={{ opacity: [0.3, 0.9, 0.3] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
       />
 
       {/* 4. Far Right */}
       <motion.div
-        className="absolute -top-20 -right-10 md:right-10 w-[300px] md:w-[400px] h-[800px] origin-top"
+        className="absolute -top-10 -right-10 md:right-10 w-[300px] md:w-[400px] h-[800px] origin-top"
         style={{
-          background: "linear-gradient(180deg, rgba(168,85,247,0.15) 0%, rgba(168,85,247,0.05) 40%, transparent 80%)",
+          background: "linear-gradient(180deg, rgba(168,85,247,0.4) 0%, rgba(168,85,247,0.1) 40%, transparent 80%)",
           clipPath: "polygon(45% 0, 55% 0, 100% 100%, 0% 100%)",
           transform: "rotate(-15deg)",
         }}
-        animate={{ opacity: [0.5, 1, 0.5] }}
+        animate={{ opacity: [0.4, 1, 0.4] }}
         transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
       />
 
-      {/* Floor Glow (Stage Floor) */}
+      {/* Stage Floor Light */}
       <div 
         className="absolute bottom-0 left-0 right-0 h-[300px]"
         style={{
-          background: "radial-gradient(ellipse at bottom, rgba(168,85,247,0.15) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse at bottom, rgba(168,85,247,0.3) 0%, transparent 70%)",
         }}
       />
     </div>
