@@ -20,12 +20,10 @@ type Product = {
   image_urls: string[];
 };
 
-// ===== Realistic Studio Spotlights (Like your Image) =====
+// ===== Realistic Stage Spotlights =====
 function StudioSpotlights() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-      
-      {/* 4 Light Fixtures & Beams */}
       {[
         { left: "15%", rotate: "25deg", delay: 0 },
         { left: "38%", rotate: "8deg", delay: 1 },
@@ -37,37 +35,64 @@ function StudioSpotlights() {
           className="absolute top-0 flex flex-col items-center origin-top"
           style={{ left: light.left, transform: "translateX(-50%)" }}
         >
-          {/* Light Wire */}
           <div className="w-[2px] h-16 bg-zinc-700" />
-
-          {/* Light Housing (Metal Body) */}
           <div className="relative w-10 h-12 bg-zinc-800 rounded-md border-b-4 border-zinc-600 shadow-2xl flex flex-col items-center justify-end pb-1 z-20">
-            {/* Glowing Lens */}
             <div className="w-6 h-3 bg-white rounded-full shadow-[0_0_20px_5px_rgba(255,255,255,0.8)]" />
           </div>
-
-          {/* Soft White Light Beam */}
           <motion.div
             className="absolute top-[110px] w-[350px] md:w-[500px] h-[900px] origin-top z-10"
             style={{
               background: "linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 40%, transparent 80%)",
               clipPath: "polygon(45% 0, 55% 0, 100% 100%, 0% 100%)",
               transform: `rotate(${light.rotate})`,
-              filter: "blur(15px)", // Yeh soft realistic look dega
+              filter: "blur(15px)",
             }}
             animate={{ opacity: [0.7, 1, 0.7] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: light.delay }}
           />
         </div>
       ))}
-
-      {/* Stage Floor Glow (Neeche zameen par roshni) */}
+      
+      {/* Stage Floor Glow */}
       <div 
         className="absolute bottom-0 left-0 right-0 h-[400px] z-0"
         style={{
           background: "radial-gradient(ellipse at bottom, rgba(255,255,255,0.15) 0%, transparent 60%)",
         }}
       />
+    </div>
+  );
+}
+
+// ===== Animated Stage Smoke =====
+function StageSmoke() {
+  return (
+    <div className="absolute bottom-0 left-0 right-0 h-[500px] overflow-hidden pointer-events-none z-10">
+      {[...Array(6)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full bg-white/5 blur-[40px]"
+          style={{
+            width: Math.random() * 300 + 200 + "px",
+            height: Math.random() * 200 + 100 + "px",
+            bottom: `-${Math.random() * 100}px`,
+            left: `${Math.random() * 100}%`,
+            mixBlendMode: "screen", // Yeh roshni ke saath mix karega
+          }}
+          animate={{
+            x: [0, Math.random() * 100 - 50, 0],
+            y: [0, Math.random() * -50 - 20, 0],
+            scale: [1, 1.2, 1],
+            opacity: [0, 0.15, 0],
+          }}
+          transition={{
+            duration: Math.random() * 10 + 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: Math.random() * 5,
+          }}
+        />
+      ))}
     </div>
   );
 }
@@ -104,8 +129,9 @@ export default function Home() {
       {/* ===== 1. HERO SECTION ===== */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center">
         
-        {/* Background Spotlights */}
+        {/* Background Effects */}
         <StudioSpotlights />
+        <StageSmoke />
 
         <div className="relative z-20 max-w-4xl mx-auto mt-20">
           
@@ -210,7 +236,7 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="relative z-10 py-24 px-6 bg-black"
+        className="relative z-20 py-24 px-6 bg-black"
       >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
@@ -263,7 +289,7 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="relative z-10 py-24 px-6 bg-gradient-to-b from-black via-purple-900/10 to-black"
+        className="relative z-20 py-24 px-6 bg-gradient-to-b from-black via-purple-900/10 to-black"
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
@@ -334,7 +360,7 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="relative z-10 py-24 px-6 bg-black"
+        className="relative z-20 py-24 px-6 bg-black"
       >
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-8">
@@ -370,7 +396,7 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="relative z-10 py-24 px-6 bg-gradient-to-b from-black to-purple-900/20"
+        className="relative z-20 py-24 px-6 bg-gradient-to-b from-black to-purple-900/20"
       >
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
