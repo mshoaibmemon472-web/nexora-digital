@@ -47,46 +47,46 @@ function StudioSpotlights() {
               transform: `rotate(${light.rotate})`,
               filter: "blur(15px)",
             }}
-            animate={{ opacity: [0.7, 1, 0.7] }}
+            animate={{ opacity: [0.6, 0.9, 0.6] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: light.delay }}
           />
         </div>
       ))}
       
-      {/* Stage Floor Glow */}
+      {/* Stage Floor Glow (Purple tint) */}
       <div 
         className="absolute bottom-0 left-0 right-0 h-[400px] z-0"
         style={{
-          background: "radial-gradient(ellipse at bottom, rgba(255,255,255,0.15) 0%, transparent 60%)",
+          background: "radial-gradient(ellipse at bottom, rgba(168,85,247,0.2) 0%, transparent 60%)",
         }}
       />
     </div>
   );
 }
 
-// ===== Animated Stage Smoke =====
+// ===== Animated Heavy Stage Smoke =====
 function StageSmoke() {
   return (
-    <div className="absolute bottom-0 left-0 right-0 h-[500px] overflow-hidden pointer-events-none z-10">
-      {[...Array(6)].map((_, i) => (
+    <div className="absolute bottom-0 left-0 right-0 h-[600px] overflow-hidden pointer-events-none z-10">
+      {[...Array(12)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute rounded-full bg-white/5 blur-[40px]"
+          className="absolute rounded-full blur-[40px] mix-blend-screen"
           style={{
-            width: Math.random() * 300 + 200 + "px",
-            height: Math.random() * 200 + 100 + "px",
+            width: Math.random() * 400 + 200 + "px",
+            height: Math.random() * 300 + 150 + "px",
             bottom: `-${Math.random() * 100}px`,
             left: `${Math.random() * 100}%`,
-            mixBlendMode: "screen", // Yeh roshni ke saath mix karega
+            background: i % 2 === 0 ? "rgba(255, 255, 255, 0.15)" : "rgba(168, 85, 247, 0.15)", // White & Purple Smoke
           }}
           animate={{
-            x: [0, Math.random() * 100 - 50, 0],
-            y: [0, Math.random() * -50 - 20, 0],
-            scale: [1, 1.2, 1],
-            opacity: [0, 0.15, 0],
+            x: [0, Math.random() * 150 - 75, 0],
+            y: [0, Math.random() * -100 - 50, 0],
+            scale: [1, Math.random() * 0.5 + 1.3, 1],
+            opacity: [0, 0.45, 0], // Zyada visible fog
           }}
           transition={{
-            duration: Math.random() * 10 + 10,
+            duration: Math.random() * 8 + 10,
             repeat: Infinity,
             ease: "easeInOut",
             delay: Math.random() * 5,
@@ -135,27 +135,29 @@ export default function Home() {
 
         <div className="relative z-20 max-w-4xl mx-auto mt-20">
           
+          {/* Neon Badge */}
           <motion.div
             initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-8 px-5 py-2 border border-white/20 rounded-full bg-white/5 backdrop-blur-md inline-flex items-center gap-2"
+            className="mb-8 px-5 py-2 border border-purple-500/50 rounded-full bg-purple-500/10 backdrop-blur-md inline-flex items-center gap-2"
           >
             <motion.span
               animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
               transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-2 h-2 bg-white rounded-full shadow-[0_0_10px_white]"
+              className="w-2 h-2 bg-purple-400 rounded-full shadow-[0_0_10px_purple]"
             />
-            <p className="text-sm text-gray-200 font-medium tracking-wide">Books, Products & More</p>
+            <p className="text-sm text-purple-300 font-medium">Books, Products & More</p>
           </motion.div>
 
+          {/* Neon Gradient Text */}
           <motion.h1
             initial={{ opacity: 0, y: 30, filter: "blur(12px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.9, delay: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
-            className="text-6xl md:text-8xl font-bold mb-6 tracking-tight drop-shadow-[0_0_40px_rgba(255,255,255,0.4)]"
+            className="text-6xl md:text-8xl font-bold mb-6 tracking-tight drop-shadow-[0_0_30px_rgba(168,85,247,0.4)]"
           >
-            <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
               Nexora Digital
             </span>
           </motion.h1>
@@ -164,7 +166,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
-            className="text-xl md:text-2xl text-gray-300 mb-2 font-medium"
+            className="text-xl md:text-2xl text-gray-400 mb-2 font-medium"
           >
             Premium Products by
           </motion.p>
@@ -184,10 +186,11 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 1.1 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
+            {/* Neon Button */}
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
               <Link
                 href="/products"
-                className="block px-8 py-4 bg-white text-black rounded-full font-bold shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] transition-all duration-300"
+                className="block px-8 py-4 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full font-semibold text-white shadow-lg shadow-pink-500/50 hover:shadow-pink-500/80 transition-all duration-300"
               >
                 🛍️ Shop Now
               </Link>
@@ -196,7 +199,7 @@ export default function Home() {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
               <Link
                 href="/books"
-                className="block px-8 py-4 border border-white/30 rounded-full font-semibold text-white bg-black/40 backdrop-blur-md hover:bg-white/10 transition-all duration-300"
+                className="block px-8 py-4 border border-white/20 rounded-full font-semibold text-white bg-black/40 backdrop-blur-md hover:bg-white/10 transition-all duration-300"
               >
                 📖 Explore Books
               </Link>
@@ -212,7 +215,7 @@ export default function Home() {
           transition={{ delay: 1.6 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 cursor-pointer group"
         >
-          <div className="flex flex-col items-center gap-2 text-gray-400 group-hover:text-white transition-colors">
+          <div className="flex flex-col items-center gap-2 text-gray-500 group-hover:text-purple-400 transition-colors">
             <p className="text-xs tracking-widest uppercase">Scroll</p>
             <motion.div
               animate={{ y: [0, 8, 0] }}
