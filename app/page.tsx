@@ -20,61 +20,65 @@ type Product = {
   image_urls: string[];
 };
 
-// ===== Diagonal Light Beams (Fast & Premium) =====
-const beamsData = [
-  { left: "5%", width: 180, rotate: 18, color: "rgba(168,85,247,0.18)", delay: 0 },
-  { left: "20%", width: 120, rotate: 22, color: "rgba(6,182,212,0.15)", delay: 1.5 },
-  { left: "35%", width: 200, rotate: 15, color: "rgba(236,72,153,0.12)", delay: 0.8 },
-  { left: "50%", width: 150, rotate: 20, color: "rgba(168,85,247,0.2)", delay: 2 },
-  { left: "65%", width: 220, rotate: 17, color: "rgba(6,182,212,0.15)", delay: 1 },
-  { left: "80%", width: 140, rotate: 25, color: "rgba(236,72,153,0.13)", delay: 2.5 },
-  { left: "92%", width: 160, rotate: 20, color: "rgba(168,85,247,0.16)", delay: 0.5 },
-];
-
-function LightBeams() {
+// ===== Stage Spotlights Background =====
+function StageSpotlights() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       
-      {/* Top Light Source Glow */}
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px]"
+      {/* 4 Spotlights Cones */}
+      {/* 1. Far Left */}
+      <motion.div
+        className="absolute -top-20 -left-10 md:left-10 w-[300px] md:w-[400px] h-[800px] origin-top"
         style={{
-          background:
-            "radial-gradient(ellipse at top, rgba(168,85,247,0.25) 0%, rgba(6,182,212,0.15) 30%, transparent 70%)",
+          background: "linear-gradient(180deg, rgba(168,85,247,0.15) 0%, rgba(168,85,247,0.05) 40%, transparent 80%)",
+          clipPath: "polygon(45% 0, 55% 0, 100% 100%, 0% 100%)",
+          transform: "rotate(15deg)",
         }}
+        animate={{ opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0 }}
       />
 
-      {/* Diagonal Beams */}
-      {beamsData.map((beam, i) => (
-        <motion.div
-          key={i}
-          className="absolute -top-[20%] h-[140%]"
-          style={{
-            left: beam.left,
-            width: beam.width,
-            transform: `rotate(${beam.rotate}deg)`,
-            transformOrigin: "top center",
-            background: `linear-gradient(180deg, ${beam.color} 0%, transparent 80%)`,
-            willChange: "opacity",
-          }}
-          animate={{
-            opacity: [0.4, 1, 0.4],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: beam.delay,
-          }}
-        />
-      ))}
-
-      {/* Subtle Noise Texture on Top */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
+      {/* 2. Center Left */}
+      <motion.div
+        className="absolute -top-20 left-[30%] w-[250px] md:w-[350px] h-[700px] origin-top"
         style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+          background: "linear-gradient(180deg, rgba(6,182,212,0.15) 0%, rgba(6,182,212,0.05) 40%, transparent 80%)",
+          clipPath: "polygon(45% 0, 55% 0, 100% 100%, 0% 100%)",
+          transform: "rotate(5deg)",
+        }}
+        animate={{ opacity: [0.5, 0.9, 0.5] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      />
+
+      {/* 3. Center Right */}
+      <motion.div
+        className="absolute -top-20 right-[30%] w-[250px] md:w-[350px] h-[700px] origin-top"
+        style={{
+          background: "linear-gradient(180deg, rgba(236,72,153,0.12) 0%, rgba(236,72,153,0.04) 40%, transparent 80%)",
+          clipPath: "polygon(45% 0, 55% 0, 100% 100%, 0% 100%)",
+          transform: "rotate(-5deg)",
+        }}
+        animate={{ opacity: [0.4, 0.8, 0.4] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+      />
+
+      {/* 4. Far Right */}
+      <motion.div
+        className="absolute -top-20 -right-10 md:right-10 w-[300px] md:w-[400px] h-[800px] origin-top"
+        style={{
+          background: "linear-gradient(180deg, rgba(168,85,247,0.15) 0%, rgba(168,85,247,0.05) 40%, transparent 80%)",
+          clipPath: "polygon(45% 0, 55% 0, 100% 100%, 0% 100%)",
+          transform: "rotate(-15deg)",
+        }}
+        animate={{ opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+      />
+
+      {/* Floor Glow (Stage Floor) */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-[300px]"
+        style={{
+          background: "radial-gradient(ellipse at bottom, rgba(168,85,247,0.15) 0%, transparent 70%)",
         }}
       />
     </div>
@@ -113,26 +117,18 @@ export default function Home() {
       {/* ===== 1. HERO SECTION ===== */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center">
         
-        {/* Light Beams Background */}
-        <LightBeams />
+        <StageSpotlights />
 
-        {/* Subtle Grid Pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        {/* Static Glow Behind Title */}
+        <div 
+          className="absolute w-[600px] h-[600px] rounded-full pointer-events-none"
           style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
-            backgroundSize: "80px 80px",
-            maskImage:
-              "radial-gradient(ellipse at center, black 30%, transparent 80%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse at center, black 30%, transparent 80%)",
+            background: "radial-gradient(circle, rgba(168,85,247,0.35) 0%, rgba(6,182,212,0.2) 40%, transparent 70%)",
           }}
         />
 
         <div className="relative z-10 max-w-4xl mx-auto">
           
-          {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -144,12 +140,9 @@ export default function Home() {
               transition={{ duration: 1.5, repeat: Infinity }}
               className="w-2 h-2 bg-purple-400 rounded-full"
             />
-            <p className="text-sm text-purple-300 font-medium">
-              Books, Products & More
-            </p>
+            <p className="text-sm text-purple-300 font-medium">Books, Products & More</p>
           </motion.div>
 
-          {/* Main Title */}
           <motion.h1
             initial={{ opacity: 0, y: 30, filter: "blur(12px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -161,7 +154,6 @@ export default function Home() {
             </span>
           </motion.h1>
 
-          {/* Subtitle */}
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -180,7 +172,6 @@ export default function Home() {
             M. Shoaib Memon
           </motion.p>
 
-          {/* Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
