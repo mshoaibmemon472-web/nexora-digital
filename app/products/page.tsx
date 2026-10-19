@@ -103,12 +103,15 @@ export default function ProductsPage() {
   <div className="relative z-10 max-w-7xl mx-auto">
         
         {/* Header */}
-        <div className="text-center mb-10">
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-gray-900 tracking-tight">
-            Shop Products
-          </h1>
-          <p className="text-gray-500 text-lg">Discover our premium collection</p>
-        </div>
+<div className="text-center mb-10">
+  <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-gray-900 tracking-tight">
+    Shop Products
+  </h1>
+  <p className="text-gray-600 text-lg mb-2">Discover our premium collection</p>
+  <p className="text-gray-400 text-sm md:text-base max-w-2xl mx-auto">
+    Handpicked trending products from Amazon. Worldwide shipping available. Click "Buy on Amazon" to view details and purchase safely.
+  </p>
+</div>
 
         {/* Search Bar */}
         <div className="max-w-2xl mx-auto mb-8">
