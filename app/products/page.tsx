@@ -245,7 +245,7 @@ export default function ProductsPage() {
                       rel="noopener noreferrer"
                       className="w-full text-center px-4 py-2.5 bg-gray-900 hover:bg-black text-white rounded-xl text-sm font-bold transition-all hover:scale-[1.02] active:scale-95 shadow-md"
                     >
-                      Buy Now
+                      🛒 Buy on Amazon
                     </a>
                   </div>
                 </motion.div>
