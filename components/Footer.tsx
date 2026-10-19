@@ -24,13 +24,14 @@ export default function Footer() {
           {/* Quick Links */}
           <div>
             <h4 className="text-white font-semibold mb-4">Quick Links</h4>
-            <div className="flex flex-col gap-2">
-              <Link href="/" className="text-gray-400 hover:text-white text-sm transition-colors">Home</Link>
-              <Link href="/books" className="text-gray-400 hover:text-white text-sm transition-colors">Books</Link>
-              <Link href="/products" className="text-gray-400 hover:text-white text-sm transition-colors">My Products</Link>
-              <Link href="/about" className="text-gray-400 hover:text-white text-sm transition-colors">About</Link>
-              <Link href="/contact" className="text-gray-400 hover:text-white text-sm transition-colors">Contact</Link>
-            </div>
+           <div className="flex flex-col gap-2">
+  <Link href="/" className="text-gray-400 hover:text-white text-sm transition-colors">Home</Link>
+  <Link href="/books" className="text-gray-400 hover:text-white text-sm transition-colors">Books</Link>
+  <Link href="/products" className="text-gray-400 hover:text-white text-sm transition-colors">My Products</Link>
+  <Link href="/blog" className="text-gray-400 hover:text-white text-sm transition-colors">Blog</Link> {/* <-- Yeh add karo */}
+  <Link href="/about" className="text-gray-400 hover:text-white text-sm transition-colors">About</Link>
+  <Link href="/contact" className="text-gray-400 hover:text-white text-sm transition-colors">Contact</Link>
+</div>
           </div>
 
           {/* Connect */}
