@@ -77,6 +77,15 @@ export default function AdminDashboard() {
             <h2 className="text-2xl font-bold text-white mb-2">All Products</h2>
             <p className="text-gray-400 text-sm">Manage your products</p>
           </Link>
+          {/* Naya Blog Card */}
+<Link
+  href="/admin/dashboard/add-blog"
+  className="group p-8 border border-white/10 rounded-2xl bg-white/5 backdrop-blur-sm hover:border-pink-500/50 hover:bg-pink-500/10 transition-all duration-300 hover:scale-105 md:col-span-2"
+>
+  <div className="text-5xl mb-4">✍️</div>
+  <h2 className="text-2xl font-bold text-white mb-2">Write a Blog</h2>
+  <p className="text-gray-400 text-sm">Create a new article for your website</p>
+</Link>
         </div>
       </div>
     </main>
