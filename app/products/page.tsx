@@ -95,8 +95,12 @@ export default function ProductsPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-50 text-gray-900 pt-32 pb-20 px-6">
-      <div className="max-w-7xl mx-auto">
+    <main className="min-h-screen text-gray-900 pt-32 pb-20 px-6 relative bg-fixed bg-cover bg-center" style={{ backgroundImage: "url('/shop-bg.jpg')" }}>
+  
+  {/* Background Overlay */}
+  <div className="absolute inset-0 bg-[#f8f6f4]/85 backdrop-blur-[2px]"></div>
+
+  <div className="relative z-10 max-w-7xl mx-auto">
         
         {/* Header */}
         <div className="text-center mb-10">
