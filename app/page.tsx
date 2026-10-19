@@ -204,6 +204,35 @@ export default function Home() {
               </div>
             </Link>
           </motion.div>
+          {/* Blog Landscape Button */}
+<motion.div
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6, delay: 0.4 }}
+>
+  <Link
+    href="/blog"
+    className="group relative flex flex-col items-center justify-center w-full h-64 md:h-72 rounded-[3rem] overflow-hidden border border-white/10 hover:border-cyan-500/50 transition-all duration-500"
+  >
+    {/* Background Image + Gradient */}
+    <div className="absolute inset-0 bg-[url('/smoke-bg.jpg')] bg-cover bg-center opacity-40 group-hover:scale-110 transition-transform duration-700" />
+    <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-cyan-900/70 to-black/90 opacity-80" />
+    
+    {/* Content */}
+    <div className="relative z-10 text-center px-6">
+      <div className="text-5xl mb-4">✍️</div>
+      <h2 className="text-3xl md:text-5xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+        Read My Blog
+      </h2>
+      <p className="text-gray-300 text-lg mb-6">Insights, AI Knowledge & Stories</p>
+      <span className="inline-block px-8 py-3 bg-white text-black font-bold rounded-full group-hover:bg-cyan-500 group-hover:text-white transition-colors">
+        Read Articles →
+      </span>
+    </div>
+  </Link>
+</motion.div>
+                
 
         </div>
       </section>
