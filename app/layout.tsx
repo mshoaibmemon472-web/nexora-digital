@@ -22,6 +22,11 @@ export const metadata: Metadata = {
   description: "Discover premium AI education books, storybooks, and trending e-commerce products. Learn, build, and grow with Nexora Digital by M. Shoaib Memon.",
   keywords: ["Nexora Digital", "AI books", "story books", "e-commerce", "Amazon products", "M Shoaib Memon", "AI prompts"],
   authors: [{ name: "M. Shoaib Memon" }],
+  
+  verification: {
+  google: "a31dzuemgTuHF6GDpr8TlDwqxjlUH_0tMJyuo98czbk"
+},
+
   openGraph: {
     title: "Nexora Digital | Premium Books & Products",
     description: "Discover premium AI education, storybooks, and trending products.",
