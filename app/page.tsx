@@ -8,17 +8,31 @@ import { motion } from "framer-motion";
 function HeroBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      
+      {/* 1. Real Smoke Image */}
       <motion.div
         className="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-screen"
         style={{
-          backgroundImage: "url('/smoke-bg.jpg')",
+          backgroundImage: "url('/smoke-bg.jpg')", 
           backgroundPosition: "bottom center",
         }}
-        animate={{ scale: [1, 1.05, 1] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+        animate={{
+          scale: [1, 1.05, 1], // Halka sa breathing effect
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
       />
+
+      {/* 2. Purple Color Overlay */}
       <div className="absolute inset-0 bg-purple-900/30 mix-blend-color" />
+
+      {/* 3. Dark Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
+
+      {/* 4. Purple Spotlight Beam from Top Right */}
       <motion.div
         className="absolute -top-20 right-10 w-[300px] md:w-[500px] h-[800px] origin-top"
         style={{
@@ -30,7 +44,9 @@ function HeroBackground() {
         animate={{ opacity: [0.4, 0.8, 0.4] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
-      <div
+
+      {/* 5. Purple Floor Glow */}
+      <div 
         className="absolute bottom-0 left-0 right-0 h-[300px]"
         style={{
           background: "radial-gradient(ellipse at bottom, rgba(168,85,247,0.25) 0%, transparent 70%)",
@@ -46,9 +62,12 @@ export default function Home() {
       
       {/* ===== 1. HERO SECTION ===== */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center">
+        
+        {/* Background Effects */}
         <HeroBackground />
 
         <div className="relative z-20 max-w-4xl mx-auto mt-20">
+          
           <motion.div
             initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -143,26 +162,49 @@ export default function Home() {
         </motion.a>
       </section>
 
-      {/* ===== 2. CATEGORY BUTTONS SECTION (Naya Design) ===== */}
+      {/* ===== 2. CATEGORY BUTTONS SECTION ===== */}
       <section id="categories-section" className="relative z-20 py-24 px-6">
         <div className="max-w-5xl mx-auto flex flex-col gap-10">
           
-          {/* Books Landscape Button */}
+          {/* 1. Blog Landscape Button */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, delay: 0 }}
+          >
+            <Link
+              href="/blog"
+              className="group relative flex flex-col items-center justify-center w-full h-64 md:h-72 rounded-[3rem] overflow-hidden border border-white/10 hover:border-cyan-500/50 transition-all duration-500"
+            >
+              <div className="absolute inset-0 bg-[url('/smoke-bg.jpg')] bg-cover bg-center opacity-40 group-hover:scale-110 transition-transform duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-cyan-900/70 to-black/90 opacity-80" />
+              <div className="relative z-10 text-center px-6">
+                <div className="text-5xl mb-4">✍️</div>
+                <h2 className="text-3xl md:text-5xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+                  Read My Blog
+                </h2>
+                <p className="text-gray-300 text-lg mb-6">Insights, AI Knowledge & Stories</p>
+                <span className="inline-block px-8 py-3 bg-white text-black font-bold rounded-full group-hover:bg-cyan-500 group-hover:text-white transition-colors">
+                  Read Articles →
+                </span>
+              </div>
+            </Link>
+          </motion.div>
+
+          {/* 2. Books Landscape Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
             <Link
               href="/books"
               className="group relative flex flex-col items-center justify-center w-full h-64 md:h-72 rounded-[3rem] overflow-hidden border border-white/10 hover:border-purple-500/50 transition-all duration-500"
             >
-              {/* Background Image + Gradient */}
               <div className="absolute inset-0 bg-[url('/smoke-bg.jpg')] bg-cover bg-center opacity-40 group-hover:scale-110 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-purple-900/70 to-black/90 opacity-80" />
-              
-              {/* Content */}
               <div className="relative z-10 text-center px-6">
                 <div className="text-5xl mb-4">📚</div>
                 <h2 className="text-3xl md:text-5xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
@@ -176,22 +218,19 @@ export default function Home() {
             </Link>
           </motion.div>
 
-          {/* Products Landscape Button */}
+          {/* 3. Products Landscape Button */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
           >
             <Link
               href="/products"
               className="group relative flex flex-col items-center justify-center w-full h-64 md:h-72 rounded-[3rem] overflow-hidden border border-white/10 hover:border-pink-500/50 transition-all duration-500"
             >
-              {/* Background Image + Gradient */}
               <div className="absolute inset-0 bg-[url('/shop-bg.jpg')] bg-cover bg-center opacity-40 group-hover:scale-110 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-pink-900/70 to-black/90 opacity-80" />
-              
-              {/* Content */}
               <div className="relative z-10 text-center px-6">
                 <div className="text-5xl mb-4">🛍️</div>
                 <h2 className="text-3xl md:text-5xl font-bold text-white mb-3 group-hover:text-pink-300 transition-colors">
@@ -204,35 +243,6 @@ export default function Home() {
               </div>
             </Link>
           </motion.div>
-          {/* Blog Landscape Button */}
-<motion.div
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
-  transition={{ duration: 0.6, delay: 0.4 }}
->
-  <Link
-    href="/blog"
-    className="group relative flex flex-col items-center justify-center w-full h-64 md:h-72 rounded-[3rem] overflow-hidden border border-white/10 hover:border-cyan-500/50 transition-all duration-500"
-  >
-    {/* Background Image + Gradient */}
-    <div className="absolute inset-0 bg-[url('/smoke-bg.jpg')] bg-cover bg-center opacity-40 group-hover:scale-110 transition-transform duration-700" />
-    <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-cyan-900/70 to-black/90 opacity-80" />
-    
-    {/* Content */}
-    <div className="relative z-10 text-center px-6">
-      <div className="text-5xl mb-4">✍️</div>
-      <h2 className="text-3xl md:text-5xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
-        Read My Blog
-      </h2>
-      <p className="text-gray-300 text-lg mb-6">Insights, AI Knowledge & Stories</p>
-      <span className="inline-block px-8 py-3 bg-white text-black font-bold rounded-full group-hover:bg-cyan-500 group-hover:text-white transition-colors">
-        Read Articles →
-      </span>
-    </div>
-  </Link>
-</motion.div>
-                
 
         </div>
       </section>
