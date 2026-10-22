@@ -67,6 +67,11 @@ export default function Footer() {
 
         </div>
 
+        <div className="flex justify-center gap-4 text-xs text-gray-500 mb-4">
+  <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+  <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
+</div>
+
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8 text-center">
           <p className="text-gray-500 text-sm">
