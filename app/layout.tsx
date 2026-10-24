@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,6 +56,32 @@ export default function RootLayout({
         <Footer />
         <Analytics />
 <GoogleAnalytics gaId="G-0CGZ4FHCLN" />
+{/* Monetag In-Page Push Ad */}
+<Script 
+  id="monetag-in-page-push" 
+  strategy="afterInteractive"
+  dangerouslySetInnerHTML={{
+    __html: `(function(s){s.dataset.zone='12111516',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`
+  }}
+/>
+{/* Monetag In-Page Push Ad */}
+  <Script 
+    id="monetag-in-page-push" 
+    strategy="afterInteractive"
+    dangerouslySetInnerHTML={{
+      __html: `(function(s){s.dataset.zone='12111516',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`
+    }}
+  />
+
+  {/* Monetag Vignette Banner Ad (Naya Add) */}
+  <Script 
+    id="monetag-vignette" 
+    strategy="afterInteractive"
+    dangerouslySetInnerHTML={{
+      __html: `(function(s){s.dataset.zone='12111547',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`
+    }}
+  />
+  
 
       </body>
     </html>
